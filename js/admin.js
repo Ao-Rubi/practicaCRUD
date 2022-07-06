@@ -1,4 +1,5 @@
 import { Serie } from "./serieClass.js";
+import { cantidadCaracteres, validacionNombre, validacionURL } from "./validaciones.js";
 
 // traemos los elementos del formulario
 let codigo = document.getElementById("codigo");
@@ -8,9 +9,14 @@ let imagen = document.getElementById("imagen");
 let genero = document.getElementById("genero");
 let formulario = document.getElementById("formSerie");
 
+console.log(titulo)
+
 let listaSeries = [];
 
 // Agregar validaciones
+titulo.addEventListener("blur",()=>{validacionNombre(titulo)});
+descripcion.addEventListener("blur",()=> {cantidadCaracteres(10,400,descripcion)});
+imagen.addEventListener("blur",()=> {validacionURL(imagen)});
 
 formulario.addEventListener("submit", crearSerie)
 
