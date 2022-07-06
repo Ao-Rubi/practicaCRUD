@@ -9,8 +9,6 @@ let imagen = document.getElementById("imagen");
 let genero = document.getElementById("genero");
 let formulario = document.getElementById("formSerie");
 
-console.log(titulo)
-
 let listaSeries = [];
 
 // Agregar validaciones
