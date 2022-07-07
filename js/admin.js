@@ -9,6 +9,7 @@ let imagen = document.getElementById("imagen");
 let genero = document.getElementById("genero");
 let formulario = document.getElementById("formSerie");
 const modalAdminSerie = new bootstrap.Modal(document.getElementById("modalSerie"));
+let btnCrearSerie = document.getElementById("btnCrearSerie");
 
 // Si hay algo en localStorage Traer datos, Si no hay nada listaSeries tiene que ser un arreglo vacio "[]"
 let listaSeries = JSON.parse(localStorage.getItem("listaSeriesKey")) || [];
@@ -17,6 +18,10 @@ let listaSeries = JSON.parse(localStorage.getItem("listaSeriesKey")) || [];
 titulo.addEventListener("blur",()=>{validacionNombre(titulo)});
 descripcion.addEventListener("blur",()=> {cantidadCaracteres(10,400,descripcion)});
 imagen.addEventListener("blur",()=> {validacionURL(imagen)});
+btnCrearSerie.addEventListener("click", ()=>{
+    limpiarFormulario();
+    modalAdminSerie.show();
+})
 
 formulario.addEventListener("submit", crearSerie)
 
@@ -31,7 +36,7 @@ function crearSerie(e){
     // Guardar la lista de series en localStorage
     guardarListaSeries();
     // Cerrar modal que administra series
-
+    modalAdminSerie.hide();
 }
 
 function limpiarFormulario(){
