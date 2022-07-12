@@ -22,6 +22,8 @@ btnCrearSerie.addEventListener("click", ()=>{
     limpiarFormulario();
     modalAdminSerie.show();
 })
+//Verifica si hay datos para dibujar en la tabla
+cargaInicial();
 
 formulario.addEventListener("submit", crearSerie)
 
@@ -43,6 +45,8 @@ function crearSerie(e){
         'La serie fue creada correctamente',
         'success'
     );
+    // Crear o dibujar fila en la tabla
+    crearFila(nuevaSerie)
 }
 
 function limpiarFormulario(){
@@ -52,4 +56,28 @@ function limpiarFormulario(){
 
 function guardarListaSeries(){
     localStorage.setItem("listaSeriesKey", JSON.stringify(listaSeries));
+}
+
+function cargaInicial(){
+    if (listaSeries.length > 0) {
+        // Dibujar tabla
+        listaSeries.forEach((itemSerie)=>{crearFila(itemSerie)});
+    }
+}
+
+function crearFila(itemSerie) {
+    let tablaSeries = document.getElementById("listaSeries");
+    tablaSeries.innerHTML += `
+    <tr>
+        <th scope="row">${itemSerie.codigo}</th>
+        <td class="text-truncate">${itemSerie.titulo}</td>
+        <td class="text-truncate">${itemSerie.descripcion}</td>
+        <td class="text-truncate">${itemSerie.imagen}</td>
+        <td>${itemSerie.genero}</td>
+        <td>
+            <button class="btn btn-warning"><i class="bi bi-pencil-square"></i></button>
+            <button class="btn btn-danger"><i class="bi bi-x-square"></i></button>
+        </td>
+    </tr>
+    `;
 }
