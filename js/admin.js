@@ -76,8 +76,37 @@ function crearFila(itemSerie) {
         <td>${itemSerie.genero}</td>
         <td>
             <button class="btn btn-warning"><i class="bi bi-pencil-square"></i></button>
-            <button class="btn btn-danger"><i class="bi bi-x-square"></i></button>
+            <button class="btn btn-danger" onclick="borrarProducto('${itemSerie.codigo}')"><i class="bi bi-x-square"></i></button>
         </td>
     </tr>
     `;
+}
+
+window.borrarProducto = function (codigo) {
+    console.log(codigo)
+    // Preguntar al usuario si estoy seguro de borrar
+    Swal.fire({
+        title: 'Estas seguro de eliminar la serie?',
+        text: "No podras volver atras!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, borrar la serie!',
+        cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Borrar la listaSeries y tambien del localStorage
+
+                // Actualizar la tabla
+
+                // Mostrar cartel de operacion exitosa
+            Swal.fire(
+                'Borrado!',
+                'La serie fue borrada.',
+                'success'
+            )
+            }
+        })
+
 }
