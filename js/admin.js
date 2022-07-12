@@ -75,7 +75,7 @@ function crearFila(itemSerie) {
         <td class="text-truncate">${itemSerie.imagen}</td>
         <td>${itemSerie.genero}</td>
         <td>
-            <button class="btn btn-warning"><i class="bi bi-pencil-square"></i></button>
+            <button class="btn btn-warning" onclick="prepararEdicionSerie('${itemSerie.codigo}')"><i class="bi bi-pencil-square"></i></button>
             <button class="btn btn-danger" onclick="borrarProducto('${itemSerie.codigo}')"><i class="bi bi-x-square"></i></button>
         </td>
     </tr>
@@ -117,4 +117,17 @@ window.borrarProducto = function (codigo) {
 function borrarTabla(){
     let tbodySeries = document.getElementById("listaSeries");
     tbodySeries.innerHTML ="";
+}
+
+window.prepararEdicionSerie = function (codigoP) {
+    // Cargar los datos de la serie a editar
+    let serieBuscada = listaSeries.find((serie)=> {return serie.codigo == codigoP});
+    // Asignar valores de cada input
+    codigo.value = serieBuscada.codigo;
+    titulo.value = serieBuscada.titulo;
+    descripcion.value = serieBuscada.descripcion;
+    imagen.value = serieBuscada.imagen;
+    genero.value = serieBuscada.genero;
+    // Mostrar formulario de ventana modal
+    modalAdminSerie.show();
 }
