@@ -10,6 +10,8 @@ let genero = document.getElementById("genero");
 let formulario = document.getElementById("formSerie");
 const modalAdminSerie = new bootstrap.Modal(document.getElementById("modalSerie"));
 let btnCrearSerie = document.getElementById("btnCrearSerie");
+// variable para manejar el create y el update
+let serieExistente = false; // si es false la serie es nueva, si es true ya existe y deberia modificar.
 
 // Si hay algo en localStorage Traer datos, Si no hay nada listaSeries tiene que ser un arreglo vacio "[]"
 let listaSeries = JSON.parse(localStorage.getItem("listaSeriesKey")) || [];
@@ -22,10 +24,22 @@ btnCrearSerie.addEventListener("click", ()=>{
     limpiarFormulario();
     modalAdminSerie.show();
 })
+
+formulario.addEventListener("submit", guardarSerie)
+
 //Verifica si hay datos para dibujar en la tabla
 cargaInicial();
 
-formulario.addEventListener("submit", crearSerie)
+function guardarSerie(e) {
+    e.preventDefault();
+    //if(true)
+    if (serieExistente) {
+        //quiero modificar una serie existente
+    }else{
+        // aqui quiero crear una nueva serie
+        crearSerie()
+    }
+}
 
 function crearSerie(e){
     e.preventDefault()
@@ -130,4 +144,6 @@ window.prepararEdicionSerie = function (codigoP) {
     genero.value = serieBuscada.genero;
     // Mostrar formulario de ventana modal
     modalAdminSerie.show();
+    // Aqui modifico la variable serieExistente para poder editar
+    serieExistente = true;
 }
