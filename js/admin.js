@@ -23,6 +23,8 @@ imagen.addEventListener("blur",()=> {validacionURL(imagen)});
 btnCrearSerie.addEventListener("click", ()=>{
     limpiarFormulario();
     modalAdminSerie.show();
+    //Considero crear una serie
+    serieExistente = false
 })
 
 formulario.addEventListener("submit", guardarSerie)
@@ -35,6 +37,10 @@ function guardarSerie(e) {
     //if(true)
     if (serieExistente) {
         //quiero modificar una serie existente
+        //Validar datos
+        //Guardar acutalizacion
+        guardarEdicionSerie();
+        serieExistente = false;
     }else{
         // aqui quiero crear una nueva serie
         if (validacionNombre(titulo) && cantidadCaracteres(10,400,descripcion) && validacionURL(imagen)) {
@@ -155,4 +161,26 @@ window.prepararEdicionSerie = function (codigoP) {
     modalAdminSerie.show();
     // Aqui modifico la variable serieExistente para poder editar
     serieExistente = true;
+}
+
+function guardarEdicionSerie() {
+    // Necesitamos la posicion de nuestra serie dentro del arreglo
+    let posicionSerie = listaSeries.findIndex((serie)=> {return serie.codigo == codigo.value})
+    // Modificamos los valores de la serie encontrada
+    listaSeries[posicionSerie].titulo = titulo.value;
+    listaSeries[posicionSerie].descripcion = descripcion.value;
+    listaSeries[posicionSerie].imagen = imagen.value;
+    listaSeries[posicionSerie].genero = genero.value;
+    // Actualizamos el localStorage
+    guardarListaSeries();
+    // Actualizar la tabla
+    borrarTabla();
+    cargaInicial();
+    // Indicar que la serie fue modificada o no.
+    Swal.fire(
+        'Perfecto!',
+        'La serie fue editada correctamente',
+        'success'
+    )
+    modalAdminSerie.hide();
 }
