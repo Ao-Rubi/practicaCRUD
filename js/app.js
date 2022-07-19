@@ -22,5 +22,5 @@ function crearColumna(serie) {
 }
 
 window.verDetalle = (codigo)=> {
-    window.location.href = window.location.origin+ "/pages/detalles.html"
+    window.location.href = window.location.origin+ `/pages/detalles.html?codigo=${codigo}`;
 }

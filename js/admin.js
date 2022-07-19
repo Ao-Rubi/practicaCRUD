@@ -18,7 +18,7 @@ let listaSeries = JSON.parse(localStorage.getItem("listaSeriesKey")) || [];
 
 // Agregar validaciones
 titulo.addEventListener("blur",()=>{validacionNombre(titulo)});
-descripcion.addEventListener("blur",()=> {cantidadCaracteres(10,400,descripcion)});
+descripcion.addEventListener("blur",()=> {cantidadCaracteres(10,700,descripcion)});
 imagen.addEventListener("blur",()=> {validacionURL(imagen)});
 btnCrearSerie.addEventListener("click", ()=>{
     limpiarFormulario();
